@@ -1,1 +1,9 @@
-(() => {console.log("hello")})()
+import React from 'react';
+import ReactDOM from 'react-dom';
+ 
+const title = 'Weather App React Setup';
+ 
+ReactDOM.render(
+  <div>{title}</div>,
+  document.getElementById('app')
+);
