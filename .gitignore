@@ -11,3 +11,4 @@ logs
 **/*.back.*
 
 build
+dist
