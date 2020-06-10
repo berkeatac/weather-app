@@ -1,38 +1,38 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
-  entry: './src/index.js',
+  mode: "development",
+  devtool: "eval-source-map",
+  entry: "./src/index.js",
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
-      }
-    ]
+        use: ["babel-loader", "eslint-loader"],
+      },
+    ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ["*", ".js", ".jsx"],
   },
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: `${__dirname}/dist`,
+    publicPath: "/",
+    filename: "bundle.js",
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Weather App',
-      template: './src/index.html'
-    })
+      title: "Weather App",
+      template: "./src/index.html",
+    }),
   ],
   devServer: {
-    contentBase: './dist',
-    hot: true
-  }
+    contentBase: "./dist",
+    hot: true,
+  },
 };
