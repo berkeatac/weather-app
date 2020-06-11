@@ -1,10 +1,14 @@
-import { createStore } from "redux";
+/* eslint-disable no-underscore-dangle */
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import weatherReducer from "../reducers/weather";
 
 const store = createStore(
   weatherReducer,
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 export default store;
