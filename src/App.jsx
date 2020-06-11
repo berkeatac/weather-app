@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const App = ({ title }) => <div>{title}</div>;
+import { getWeatherData } from "./actions/weather";
 
-export default App;
+const App = ({ title, getWeather }) => {
+  useEffect(() => {
+    getWeather();
+  }, []);
+
+  return <div>{title}</div>;
+};
 
 App.defaultProps = {
   title: "Weather App",
+  getWeather: () => {},
 };
 
 App.propTypes = {
   title: PropTypes.string,
+  getWeather: PropTypes.func,
 };
+
+const mapStateToProps = () => ({
+  //
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getWeather: () => dispatch(getWeatherData),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
