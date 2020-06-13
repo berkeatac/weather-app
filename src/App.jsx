@@ -12,14 +12,13 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 
 import { fetchWeatherData, setWeatherUnit } from "./actions/weather";
-import WeatherCard from "./components/WeatherCard";
+import WeatherCardRow from "./components/WeatherCardsRow";
 
-const App = ({ getWeather, setUnit, list, loading, unit }) => {
+const App = ({ getWeather, setUnit, unit }) => {
   useEffect(() => {
-    console.log(loading);
-    getWeather();
-    console.log(list);
-  }, []);
+    getWeather(unit);
+    // console.log(loading);
+  }, [unit]);
 
   return (
     <Container style={{ marginTop: 40 }}>
@@ -66,15 +65,7 @@ const App = ({ getWeather, setUnit, list, loading, unit }) => {
             <NavigateNextIcon style={{ fontSize: 40 }} />
           </IconButton>
         </Grid>
-        <Grid item xs={4}>
-          <WeatherCard />
-        </Grid>
-        <Grid item xs={4}>
-          <WeatherCard />
-        </Grid>
-        <Grid item xs={4}>
-          <WeatherCard />
-        </Grid>
+        <WeatherCardRow />
       </Grid>
     </Container>
   );
@@ -83,27 +74,24 @@ const App = ({ getWeather, setUnit, list, loading, unit }) => {
 App.defaultProps = {
   getWeather: () => {},
   setUnit: () => {},
-  list: [],
-  loading: true,
+  // loading: true,
   unit: "fahrenheit",
 };
 
 App.propTypes = {
   getWeather: PropTypes.func,
   setUnit: PropTypes.func,
-  list: PropTypes.arrayOf(PropTypes.object),
-  loading: PropTypes.bool,
+  // loading: PropTypes.bool,
   unit: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-  list: state.data.list,
-  loading: state.loading,
+  // loading: state.loading,
   unit: state.unit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getWeather: () => dispatch(fetchWeatherData()),
+  getWeather: (unit) => dispatch(fetchWeatherData(unit)),
   setUnit: (unit) => dispatch(setWeatherUnit(unit)),
 });
 
