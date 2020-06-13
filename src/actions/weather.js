@@ -1,6 +1,10 @@
 import moment from "moment";
 
-import { GET_WEATHER_DATA, CHANGE_UNIT } from "../constants/actionTypes";
+import {
+  GET_WEATHER_DATA,
+  CHANGE_UNIT,
+  SET_SELECTED_CARD,
+} from "../constants/actionTypes";
 import fetchWeather from "../api/weatherAPI";
 
 const getWeatherData = (data, unit) => ({
@@ -12,6 +16,11 @@ const getWeatherData = (data, unit) => ({
 const setWeatherUnit = (unit) => ({
   type: CHANGE_UNIT,
   unit,
+});
+
+const setSelectedCard = (day) => ({
+  type: SET_SELECTED_CARD,
+  day,
 });
 
 // Creates hour to temp object
@@ -51,4 +60,9 @@ const fetchMetricWeatherData = () => {
   };
 };
 
-export { setWeatherUnit, fetchMetricWeatherData, fetchImperialWeatherData };
+export {
+  setWeatherUnit,
+  fetchMetricWeatherData,
+  fetchImperialWeatherData,
+  setSelectedCard,
+};

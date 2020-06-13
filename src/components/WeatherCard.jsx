@@ -8,14 +8,15 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
   root: {
     minWidth: 150,
+    borderColor: (selected) => (selected ? "#000000" : null),
   },
   pos: {
     marginBottom: 12,
   },
 });
 
-const WeatherCard = ({ date, temps, unit }) => {
-  const classes = useStyles();
+const WeatherCard = ({ date, temps, unit, selected }) => {
+  const classes = useStyles(selected);
 
   const averageTemp = (temp) => {
     const values = Object.values(temp);
@@ -48,12 +49,14 @@ WeatherCard.defaultProps = {
   date: "date",
   temps: {},
   unit: "F",
+  selected: false,
 };
 
 WeatherCard.propTypes = {
   date: PropTypes.string,
   temps: PropTypes.objectOf(PropTypes.number),
   unit: PropTypes.string,
+  selected: PropTypes.bool,
 };
 
 export default WeatherCard;

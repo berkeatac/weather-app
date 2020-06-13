@@ -7,6 +7,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
 import WeatherCard from "./WeatherCard";
+import { setSelectedCard } from "../actions/weather";
 import { setWeatherCardsAmount } from "../actions/navigate";
 
 const WeatherCardRow = ({
@@ -15,6 +16,8 @@ const WeatherCardRow = ({
   unit,
   setCardsOnScreen,
   cardAmount,
+  setChartDay,
+  selectedCard,
 }) => {
   const theme = useTheme();
   const xsMatch = useMediaQuery(theme.breakpoints.up("xs"));
@@ -37,11 +40,12 @@ const WeatherCardRow = ({
         .slice(leftIndex, leftIndex + cardAmount)
         .map(([key, value]) => (
           <Grid item xs={12 / cardAmount} key={key}>
-            <CardActionArea>
+            <CardActionArea onClick={() => setChartDay(key)}>
               <WeatherCard
                 date={key}
                 temps={value}
                 unit={unit === "metric" ? "C" : "F"}
+                selected={selectedCard === key}
               />
             </CardActionArea>
           </Grid>
@@ -56,6 +60,8 @@ WeatherCardRow.defaultProps = {
   unit: "F",
   setCardsOnScreen: () => {},
   cardAmount: 0,
+  setChartDay: () => {},
+  selectedCard: "",
 };
 
 WeatherCardRow.propTypes = {
@@ -64,6 +70,8 @@ WeatherCardRow.propTypes = {
   unit: PropTypes.string,
   setCardsOnScreen: PropTypes.func,
   cardAmount: PropTypes.number,
+  setChartDay: PropTypes.func,
+  selectedCard: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -71,11 +79,12 @@ const mapStateToProps = (state) => ({
   leftIndex: state.navigationState.leftIndex,
   unit: state.weatherState.unit,
   cardAmount: state.navigationState.cardAmount,
+  selectedCard: state.weatherState.selectedCard,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   // SET SELECTED CARD COMES HERE
-  setSelectedCard: () => {},
+  setChartDay: (day) => dispatch(setSelectedCard(day)),
   setCardsOnScreen: (amount) => dispatch(setWeatherCardsAmount(amount)),
   // setUnit: (unit) => dispatch(setWeatherUnit(unit)),
 });

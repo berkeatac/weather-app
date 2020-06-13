@@ -15,6 +15,7 @@ import {
 } from "./actions/weather";
 import WeatherCardRow from "./components/WeatherCardRow";
 import NavigationRow from "./components/NavigationRow";
+import WeatherChart from "./components/WeatherChart";
 
 const App = ({ getMetricWeather, getImperialWeather, setUnit, unit }) => {
   useEffect(() => {
@@ -55,6 +56,7 @@ const App = ({ getMetricWeather, getImperialWeather, setUnit, unit }) => {
         </Grid>
         <NavigationRow />
         <WeatherCardRow />
+        <WeatherChart />
       </Grid>
     </Container>
   );
