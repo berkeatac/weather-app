@@ -1,4 +1,8 @@
 export const GET_WEATHER_DATA = "GET_WEATHER_DATA";
 export const CHANGE_UNIT = "CHANGE_UNIT";
 
+export const GO_NEXT_PAGE = "GO_NEXT_PAGE";
+export const GO_PREVIOUS_PAGE = "GO_PREVIOUS_PAGE";
+export const SET_WEATHER_CARD_AMOUNT = "SET_WEATHER_CARD_AMOUNT";
+
 export const SELECTED_DAY = "SELECTED_DAY";

@@ -7,12 +7,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import IconButton from "@material-ui/core/IconButton";
 
 import { fetchWeatherData, setWeatherUnit } from "./actions/weather";
 import WeatherCardRow from "./components/WeatherCardsRow";
+import NavigationRow from "./components/NavigationRow";
 
 const App = ({ getWeather, setUnit, unit }) => {
   useEffect(() => {
@@ -50,21 +48,7 @@ const App = ({ getWeather, setUnit, unit }) => {
             />
           </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          justify="space-between"
-          alignItems="center"
-        >
-          <IconButton>
-            <NavigateBeforeIcon style={{ fontSize: 40 }} />
-          </IconButton>
-
-          <IconButton>
-            <NavigateNextIcon style={{ fontSize: 40 }} />
-          </IconButton>
-        </Grid>
+        <NavigationRow />
         <WeatherCardRow />
       </Grid>
     </Container>
@@ -87,7 +71,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   // loading: state.loading,
-  unit: state.unit,
+  unit: state.weatherState.unit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
