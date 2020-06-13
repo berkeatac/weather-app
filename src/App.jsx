@@ -14,7 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { fetchWeatherData, setWeatherUnit } from "./actions/weather";
 import WeatherCard from "./components/WeatherCard";
 
-const App = ({ title, getWeather, setUnit, list, loading, unit }) => {
+const App = ({ getWeather, setUnit, list, loading, unit }) => {
   useEffect(() => {
     console.log(loading);
     getWeather();
@@ -67,13 +67,13 @@ const App = ({ title, getWeather, setUnit, list, loading, unit }) => {
           </IconButton>
         </Grid>
         <Grid item xs={4}>
-          <WeatherCard title={title} />
+          <WeatherCard />
         </Grid>
         <Grid item xs={4}>
-          <WeatherCard title={title} />
+          <WeatherCard />
         </Grid>
         <Grid item xs={4}>
-          <WeatherCard title={title} />
+          <WeatherCard />
         </Grid>
       </Grid>
     </Container>
@@ -81,7 +81,6 @@ const App = ({ title, getWeather, setUnit, list, loading, unit }) => {
 };
 
 App.defaultProps = {
-  title: "Weather App",
   getWeather: () => {},
   setUnit: () => {},
   list: [],
@@ -90,7 +89,6 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  title: PropTypes.string,
   getWeather: PropTypes.func,
   setUnit: PropTypes.func,
   list: PropTypes.arrayOf(PropTypes.object),
