@@ -1,3 +1,4 @@
 export const GET_WEATHER_DATA = "GET_WEATHER_DATA";
+export const CHANGE_UNIT = "CHANGE_UNIT";
 
 export const SELECTED_DAY = "SELECTED_DAY";

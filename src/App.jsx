@@ -1,12 +1,9 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-// import FormLabel from "@material-ui/core/FormLabel";
-// import FormControl from "@material-ui/core/FormControl";
-// import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -14,29 +11,42 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 
-import { fetchWeatherData } from "./actions/weather";
+import { fetchWeatherData, setWeatherUnit } from "./actions/weather";
 import WeatherCard from "./components/WeatherCard";
 
-const App = ({ title, getWeather, list }) => {
+const App = ({ title, getWeather, setUnit, list, loading, unit }) => {
   useEffect(() => {
+    console.log(loading);
     getWeather();
     console.log(list);
   }, []);
 
   return (
-    <Container>
+    <Container style={{ marginTop: 40 }}>
       <CssBaseline />
       <Grid container spacing={3}>
         <Grid container item xs={12}>
-          <Grid item xs={6} justify="center" align="center">
+          <Grid item xs={6} align="center">
             <FormControlLabel
-              control={<Checkbox name="celcius" checked />}
+              control={
+                <Checkbox
+                  name="celcius"
+                  checked={unit === "celcius"}
+                  onClick={() => setUnit("celcius")}
+                />
+              }
               label="Celcius"
             />
           </Grid>
-          <Grid item xs={6} justify="center" align="center">
+          <Grid item xs={6} align="center">
             <FormControlLabel
-              control={<Checkbox name="fahrenheit" />}
+              control={
+                <Checkbox
+                  name="fahrenheit"
+                  checked={unit === "fahrenheit"}
+                  onClick={() => setUnit("fahrenheit")}
+                />
+              }
               label="Fahrenheit"
             />
           </Grid>
@@ -73,21 +83,30 @@ const App = ({ title, getWeather, list }) => {
 App.defaultProps = {
   title: "Weather App",
   getWeather: () => {},
+  setUnit: () => {},
   list: [],
+  loading: true,
+  unit: "fahrenheit",
 };
 
 App.propTypes = {
   title: PropTypes.string,
   getWeather: PropTypes.func,
+  setUnit: PropTypes.func,
   list: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool,
+  unit: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-  list: state.list,
+  list: state.data.list,
+  loading: state.loading,
+  unit: state.unit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getWeather: () => dispatch(fetchWeatherData()),
+  setUnit: (unit) => dispatch(setWeatherUnit(unit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
