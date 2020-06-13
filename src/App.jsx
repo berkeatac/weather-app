@@ -7,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import {
   fetchMetricWeatherData,
@@ -17,7 +18,13 @@ import WeatherCardRow from "./components/WeatherCardRow";
 import NavigationRow from "./components/NavigationRow";
 import WeatherChart from "./components/WeatherChart";
 
-const App = ({ getMetricWeather, getImperialWeather, setUnit, unit }) => {
+const App = ({
+  getMetricWeather,
+  getImperialWeather,
+  setUnit,
+  unit,
+  loading,
+}) => {
   useEffect(() => {
     getMetricWeather();
     getImperialWeather();
@@ -27,37 +34,45 @@ const App = ({ getMetricWeather, getImperialWeather, setUnit, unit }) => {
   return (
     <Container style={{ marginTop: 40 }}>
       <CssBaseline />
-      <Grid container spacing={3}>
-        <Grid container item xs={12}>
-          <Grid item xs={6} align="center">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="metric"
-                  checked={unit === "metric"}
-                  onClick={() => setUnit("metric")}
-                />
-              }
-              label="Celcius"
-            />
-          </Grid>
-          <Grid item xs={6} align="center">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="imperial"
-                  checked={unit === "imperial"}
-                  onClick={() => setUnit("imperial")}
-                />
-              }
-              label="Fahrenheit"
-            />
+      {loading ? (
+        <Grid container spacing={12} align="center">
+          <Grid item xs={12} align="center">
+            <CircularProgress />
           </Grid>
         </Grid>
-        <NavigationRow />
-        <WeatherCardRow />
-        <WeatherChart />
-      </Grid>
+      ) : (
+        <Grid container spacing={3}>
+          <Grid container item xs={12}>
+            <Grid item xs={6} align="center">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="metric"
+                    checked={unit === "metric"}
+                    onClick={() => setUnit("metric")}
+                  />
+                }
+                label="Celcius"
+              />
+            </Grid>
+            <Grid item xs={6} align="center">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="imperial"
+                    checked={unit === "imperial"}
+                    onClick={() => setUnit("imperial")}
+                  />
+                }
+                label="Fahrenheit"
+              />
+            </Grid>
+          </Grid>
+          <NavigationRow />
+          <WeatherCardRow />
+          <WeatherChart />
+        </Grid>
+      )}
     </Container>
   );
 };
@@ -66,7 +81,7 @@ App.defaultProps = {
   getMetricWeather: () => {},
   getImperialWeather: () => {},
   setUnit: () => {},
-  // loading: true,
+  loading: true,
   unit: "imperial",
 };
 
@@ -74,12 +89,12 @@ App.propTypes = {
   getMetricWeather: PropTypes.func,
   getImperialWeather: PropTypes.func,
   setUnit: PropTypes.func,
-  // loading: PropTypes.bool,
+  loading: PropTypes.bool,
   unit: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-  // loading: state.loading,
+  loading: state.weatherState.loading,
   unit: state.weatherState.unit,
 });
 
