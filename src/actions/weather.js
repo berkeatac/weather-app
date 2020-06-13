@@ -1,10 +1,12 @@
 import moment from "moment";
 
 import { GET_WEATHER_DATA, CHANGE_UNIT } from "../constants/actionTypes";
+import fetchWeather from "../api/weatherAPI";
 
-const getWeatherData = (data) => ({
+const getWeatherData = (data, unit) => ({
   type: GET_WEATHER_DATA,
   data,
+  unit,
 });
 
 const setWeatherUnit = (unit) => ({
@@ -25,21 +27,28 @@ const organizeWeatherData = (data) => {
   return dailyData;
 };
 
-const fetchWeatherData = (unit = "fahrenheit") => {
-  const unitQuery = unit === "fahrenheit" ? "imperial" : "metric";
+const fetchImperialWeatherData = () => {
   return (dispatch) => {
-    return fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&APPID=75f972b80e26f14fe6c920aa6a85ad57&cnt=40&units=${unitQuery}`
-    )
-      .then((response) => response.json())
-      .then(
-        (data) => {
-          const dailyData = organizeWeatherData(data);
-          dispatch(getWeatherData(dailyData));
-        }
-        // (error) => dispatch(),
-      );
+    return fetchWeather("imperial").then(
+      (data) => {
+        const dailyData = organizeWeatherData(data);
+        dispatch(getWeatherData(dailyData, "imperial"));
+      }
+      // (error) => dispatch(),
+    );
   };
 };
 
-export { fetchWeatherData, setWeatherUnit };
+const fetchMetricWeatherData = () => {
+  return (dispatch) => {
+    return fetchWeather("metric").then(
+      (data) => {
+        const dailyData = organizeWeatherData(data);
+        dispatch(getWeatherData(dailyData, "metric"));
+      }
+      // (error) => dispatch(),
+    );
+  };
+};
+
+export { setWeatherUnit, fetchMetricWeatherData, fetchImperialWeatherData };

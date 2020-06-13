@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 import WeatherCard from "./WeatherCard";
 import { setWeatherCardsAmount } from "../actions/navigate";
@@ -36,11 +37,13 @@ const WeatherCardRow = ({
         .slice(leftIndex, leftIndex + cardAmount)
         .map(([key, value]) => (
           <Grid item xs={12 / cardAmount} key={key}>
-            <WeatherCard
-              date={key}
-              temps={value}
-              unit={unit === "celcius" ? "C" : "F"}
-            />
+            <CardActionArea>
+              <WeatherCard
+                date={key}
+                temps={value}
+                unit={unit === "metric" ? "C" : "F"}
+              />
+            </CardActionArea>
           </Grid>
         ))}
     </>
@@ -64,7 +67,7 @@ WeatherCardRow.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  data: state.weatherState.data,
+  data: state.weatherState.data[state.weatherState.unit],
   leftIndex: state.navigationState.leftIndex,
   unit: state.weatherState.unit,
   cardAmount: state.navigationState.cardAmount,

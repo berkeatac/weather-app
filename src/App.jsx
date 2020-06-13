@@ -8,15 +8,20 @@ import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 
-import { fetchWeatherData, setWeatherUnit } from "./actions/weather";
-import WeatherCardRow from "./components/WeatherCardsRow";
+import {
+  fetchMetricWeatherData,
+  fetchImperialWeatherData,
+  setWeatherUnit,
+} from "./actions/weather";
+import WeatherCardRow from "./components/WeatherCardRow";
 import NavigationRow from "./components/NavigationRow";
 
-const App = ({ getWeather, setUnit, unit }) => {
+const App = ({ getMetricWeather, getImperialWeather, setUnit, unit }) => {
   useEffect(() => {
-    getWeather(unit);
+    getMetricWeather();
+    getImperialWeather();
     // console.log(loading);
-  }, [unit]);
+  }, []);
 
   return (
     <Container style={{ marginTop: 40 }}>
@@ -27,9 +32,9 @@ const App = ({ getWeather, setUnit, unit }) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  name="celcius"
-                  checked={unit === "celcius"}
-                  onClick={() => setUnit("celcius")}
+                  name="metric"
+                  checked={unit === "metric"}
+                  onClick={() => setUnit("metric")}
                 />
               }
               label="Celcius"
@@ -39,9 +44,9 @@ const App = ({ getWeather, setUnit, unit }) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  name="fahrenheit"
-                  checked={unit === "fahrenheit"}
-                  onClick={() => setUnit("fahrenheit")}
+                  name="imperial"
+                  checked={unit === "imperial"}
+                  onClick={() => setUnit("imperial")}
                 />
               }
               label="Fahrenheit"
@@ -56,14 +61,16 @@ const App = ({ getWeather, setUnit, unit }) => {
 };
 
 App.defaultProps = {
-  getWeather: () => {},
+  getMetricWeather: () => {},
+  getImperialWeather: () => {},
   setUnit: () => {},
   // loading: true,
-  unit: "fahrenheit",
+  unit: "imperial",
 };
 
 App.propTypes = {
-  getWeather: PropTypes.func,
+  getMetricWeather: PropTypes.func,
+  getImperialWeather: PropTypes.func,
   setUnit: PropTypes.func,
   // loading: PropTypes.bool,
   unit: PropTypes.string,
@@ -75,7 +82,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getWeather: (unit) => dispatch(fetchWeatherData(unit)),
+  getImperialWeather: (unit) => dispatch(fetchMetricWeatherData(unit)),
+  getMetricWeather: (unit) => dispatch(fetchImperialWeatherData(unit)),
   setUnit: (unit) => dispatch(setWeatherUnit(unit)),
 });
 

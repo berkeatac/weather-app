@@ -60,7 +60,7 @@ NavigationRow.propTypes = {
 const mapStateToProps = (state) => ({
   leftIndex: state.navigationState.leftIndex,
   cardAmount: state.navigationState.cardAmount,
-  data: state.weatherState.data,
+  data: state.weatherState.data[state.weatherState.unit],
 });
 
 const mapDispatchToProps = (dispatch) => ({
