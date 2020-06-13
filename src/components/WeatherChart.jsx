@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts";
+import {
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Bar,
+  ResponsiveContainer,
+} from "recharts";
 import Grid from "@material-ui/core/Grid";
 
 const WeatherChart = ({ data }) => {
@@ -13,12 +20,14 @@ const WeatherChart = ({ data }) => {
 
   return (
     <Grid item xs={12} align="center">
-      <BarChart width={730} height={250} data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="hour" />
-        <YAxis />
-        <Bar dataKey="temp" fill="#8884d8" />
-      </BarChart>
+      <ResponsiveContainer width="95%" height={250}>
+        <BarChart width="auto" height={250} data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="hour" />
+          <YAxis />
+          <Bar dataKey="temp" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
     </Grid>
   );
 };

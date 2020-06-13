@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   loading: true,
   data: { imperial: [], metric: [] },
   leftIndex: 0,
-  selectedCard: "15 Jun 20",
+  selectedCard: "",
   unit: "imperial",
 };
 
@@ -17,8 +17,12 @@ function weatherReducer(state = INITIAL_STATE, action) {
     case GET_WEATHER_DATA:
       return {
         ...state,
-        data: { ...state.data, [action.unit]: action.data },
+        data: {
+          ...state.data,
+          [action.unit]: action.data,
+        },
         loading: false,
+        selectedCard: Object.keys(action.data)[0],
       };
     case CHANGE_UNIT:
       return { ...state, unit: action.unit };
