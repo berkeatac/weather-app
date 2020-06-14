@@ -4,7 +4,9 @@ import {
   GET_WEATHER_DATA,
   CHANGE_UNIT,
   SET_SELECTED_CARD,
+  SET_ERROR_MESSAGE,
 } from "../constants/actionTypes";
+import { IMPERIAL, METRIC, SUCCESS_CODE } from "../constants";
 import fetchWeather from "../api/weatherAPI";
 
 const getWeatherData = (data, unit) => ({
@@ -23,6 +25,11 @@ const setSelectedCard = (day) => ({
   day,
 });
 
+const setErrorMessage = (message) => ({
+  type: SET_ERROR_MESSAGE,
+  error: message,
+});
+
 // Creates hour to temp object
 const organizeWeatherData = (data) => {
   const dailyData = {};
@@ -38,24 +45,32 @@ const organizeWeatherData = (data) => {
 
 const fetchImperialWeatherData = () => {
   return (dispatch) => {
-    return fetchWeather("imperial").then(
+    return fetchWeather(IMPERIAL).then(
       (data) => {
-        const dailyData = organizeWeatherData(data);
-        dispatch(getWeatherData(dailyData, "imperial"));
-      }
-      // (error) => dispatch(),
+        if (data.cod === SUCCESS_CODE) {
+          const dailyData = organizeWeatherData(data);
+          dispatch(getWeatherData(dailyData, IMPERIAL));
+        } else {
+          dispatch(setErrorMessage(data.message.toString()));
+        }
+      },
+      (error) => dispatch(setErrorMessage(error.message.toString()))
     );
   };
 };
 
 const fetchMetricWeatherData = () => {
   return (dispatch) => {
-    return fetchWeather("metric").then(
+    return fetchWeather(METRIC).then(
       (data) => {
-        const dailyData = organizeWeatherData(data);
-        dispatch(getWeatherData(dailyData, "metric"));
-      }
-      // (error) => dispatch(),
+        if (data.cod === SUCCESS_CODE) {
+          const dailyData = organizeWeatherData(data);
+          dispatch(getWeatherData(dailyData, METRIC));
+        } else {
+          dispatch(setErrorMessage(data.message.toString()));
+        }
+      },
+      (error) => dispatch(setErrorMessage(error.message.toString()))
     );
   };
 };

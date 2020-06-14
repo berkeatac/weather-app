@@ -13,13 +13,15 @@ import WeatherCardRow from "./components/WeatherCardRow";
 import NavigationRow from "./components/NavigationRow";
 import WeatherChart from "./components/WeatherChart";
 import CheckboxRow from "./components/CheckboxRow";
+import ErrorDisplay from "./components/ErrorDisplay";
 
-const App = ({ getMetricWeather, getImperialWeather, loading }) => {
+const App = ({ getMetricWeather, getImperialWeather, loading, error }) => {
   useEffect(() => {
     getMetricWeather();
     getImperialWeather();
-    // console.log(loading);
   }, []);
+
+  if (error) return <ErrorDisplay />;
 
   return (
     <Container style={{ marginTop: 40 }}>
@@ -45,16 +47,19 @@ App.defaultProps = {
   getMetricWeather: () => {},
   getImperialWeather: () => {},
   loading: true,
+  error: false,
 };
 
 App.propTypes = {
   getMetricWeather: PropTypes.func,
   getImperialWeather: PropTypes.func,
   loading: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   loading: state.weatherState.loading,
+  error: state.weatherState.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

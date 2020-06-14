@@ -2,18 +2,24 @@ import {
   GET_WEATHER_DATA,
   CHANGE_UNIT,
   SET_SELECTED_CARD,
+  SET_ERROR_MESSAGE,
 } from "../constants/actionTypes";
+
+import { IMPERIAL } from "../constants";
 
 const INITIAL_STATE = {
   loading: true,
+  error: "",
   data: { imperial: [], metric: [] },
   leftIndex: 0,
   selectedCard: "",
-  unit: "imperial",
+  unit: IMPERIAL,
 };
 
 function weatherReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case SET_ERROR_MESSAGE:
+      return { ...state, error: action.error, loading: false };
     case GET_WEATHER_DATA:
       return {
         ...state,

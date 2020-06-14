@@ -7,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { setWeatherUnit } from "../../actions/weather";
+import { IMPERIAL, METRIC } from "../../constants";
 
 const CheckboxRow = ({ unit, setUnit }) => {
   return (
@@ -15,9 +16,9 @@ const CheckboxRow = ({ unit, setUnit }) => {
         <FormControlLabel
           control={
             <Checkbox
-              name="metric"
-              checked={unit === "metric"}
-              onClick={() => setUnit("metric")}
+              name={METRIC}
+              checked={unit === METRIC}
+              onClick={() => setUnit(METRIC)}
             />
           }
           label="Celcius"
@@ -27,9 +28,9 @@ const CheckboxRow = ({ unit, setUnit }) => {
         <FormControlLabel
           control={
             <Checkbox
-              name="imperial"
-              checked={unit === "imperial"}
-              onClick={() => setUnit("imperial")}
+              name={IMPERIAL}
+              checked={unit === IMPERIAL}
+              onClick={() => setUnit(IMPERIAL)}
             />
           }
           label="Fahrenheit"
@@ -41,7 +42,7 @@ const CheckboxRow = ({ unit, setUnit }) => {
 
 CheckboxRow.defaultProps = {
   setUnit: () => {},
-  unit: "imperial",
+  unit: IMPERIAL,
 };
 
 CheckboxRow.propTypes = {

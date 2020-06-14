@@ -9,6 +9,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import WeatherCard from "../WeatherCard";
 import { setSelectedCard } from "../../actions/weather";
 import { setWeatherCardsAmount } from "../../actions/navigate";
+import { METRIC } from "../../constants";
 
 const WeatherCardRow = ({
   data,
@@ -44,7 +45,7 @@ const WeatherCardRow = ({
               <WeatherCard
                 date={key}
                 temps={value}
-                unit={unit === "metric" ? "C" : "F"}
+                unit={unit === METRIC ? "C" : "F"}
                 selected={selectedCard === key}
               />
             </CardActionArea>
