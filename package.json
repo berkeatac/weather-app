@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/berkeatac/weather-app",
   "name": "weather-app",
   "version": "1.0.0",
   "description": "Weather App",
@@ -6,7 +7,9 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.dev.js",
     "build": "webpack --config ./webpack.prod.js",
-    "test": "jest --config ./jest.config.json"
+    "test": "jest --config ./jest.config.json",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": "berkeatac",
   "license": "MIT",
@@ -29,6 +32,7 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "gh-pages": "^3.0.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
