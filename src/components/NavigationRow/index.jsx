@@ -7,7 +7,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import IconButton from "@material-ui/core/IconButton";
 
-import { goNextPage, goPreviousPage } from "../actions/navigate";
+import { goNextPage, goPreviousPage } from "../../actions/navigate";
 
 const NavigationRow = ({
   leftIndex,

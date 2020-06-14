@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import weatherReducer from "./weather";
-import navigationReducer from "./navigate";
+import weatherReducer from "./weatherReducer";
+import navigationReducer from "./navigationReducer";
 
 const rootReducer = combineReducers({
   navigationState: navigationReducer,

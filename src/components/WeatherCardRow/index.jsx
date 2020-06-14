@@ -6,9 +6,9 @@ import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
-import WeatherCard from "./WeatherCard";
-import { setSelectedCard } from "../actions/weather";
-import { setWeatherCardsAmount } from "../actions/navigate";
+import WeatherCard from "../WeatherCard";
+import { setSelectedCard } from "../../actions/weather";
+import { setWeatherCardsAmount } from "../../actions/navigate";
 
 const WeatherCardRow = ({
   data,
