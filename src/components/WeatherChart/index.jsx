@@ -20,11 +20,11 @@ const WeatherChart = ({ data }) => {
 
   return (
     <Grid item xs={12} align="center">
-      <ResponsiveContainer width="95%" height={250}>
+      <ResponsiveContainer width="90%" height={250}>
         <BarChart height={250} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="hour" />
-          <YAxis />
+          <YAxis width={30} />
           <Bar dataKey="temp" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
