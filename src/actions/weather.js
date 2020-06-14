@@ -1,5 +1,3 @@
-import moment from "moment";
-
 import {
   GET_WEATHER_DATA,
   CHANGE_UNIT,
@@ -8,6 +6,7 @@ import {
 } from "../constants/actionTypes";
 import { IMPERIAL, METRIC, SUCCESS_CODE } from "../constants";
 import fetchWeather from "../api/weatherAPI";
+import { organizeWeatherData } from "../utils";
 
 const getWeatherData = (data, unit) => ({
   type: GET_WEATHER_DATA,
@@ -29,19 +28,6 @@ const setErrorMessage = (message) => ({
   type: SET_ERROR_MESSAGE,
   error: message,
 });
-
-// Creates hour to temp object
-const organizeWeatherData = (data) => {
-  const dailyData = {};
-  data.list.forEach((item) => {
-    dailyData[moment(item.dt_txt).format("DD MMM YY")] = {
-      ...dailyData[moment(item.dt_txt).format("DD MMM YY")],
-      [moment(item.dt_txt).format("HH:mm")]: item.main.temp,
-    };
-  });
-
-  return dailyData;
-};
 
 const fetchImperialWeatherData = () => {
   return (dispatch) => {

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const getAverageTemp = (temp) => {
   const values = Object.values(temp);
   return temp
@@ -15,4 +17,17 @@ const getMaxTemp = (temp) => {
   return Math.max(...Object.values(temp)).toFixed(1);
 };
 
-export { getAverageTemp, getMinTemp, getMaxTemp };
+// Creates hour to temp object
+const organizeWeatherData = (data) => {
+  const dailyData = {};
+  data.list.forEach((item) => {
+    dailyData[moment(item.dt_txt).format("DD MMM YY")] = {
+      ...dailyData[moment(item.dt_txt).format("DD MMM YY")],
+      [moment(item.dt_txt).format("HH:mm")]: item.main.temp,
+    };
+  });
+
+  return dailyData;
+};
+
+export { getAverageTemp, getMinTemp, getMaxTemp, organizeWeatherData };
