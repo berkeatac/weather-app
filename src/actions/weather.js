@@ -4,7 +4,7 @@ import {
   SET_SELECTED_CARD,
   SET_ERROR_MESSAGE,
 } from "../constants/actionTypes";
-import { IMPERIAL, METRIC, SUCCESS_CODE } from "../constants";
+import { SUCCESS_CODE } from "../constants";
 import fetchWeather from "../api/weatherAPI";
 import { organizeWeatherData } from "../utils";
 
@@ -29,13 +29,13 @@ const setErrorMessage = (message) => ({
   error: message,
 });
 
-const fetchImperialWeatherData = () => {
+const fetchWeatherData = (unit) => {
   return (dispatch) => {
-    return fetchWeather(IMPERIAL).then(
+    return fetchWeather(unit).then(
       (data) => {
         if (data.cod === SUCCESS_CODE) {
           const dailyData = organizeWeatherData(data);
-          dispatch(getWeatherData(dailyData, IMPERIAL));
+          dispatch(getWeatherData(dailyData, unit));
         } else {
           dispatch(setErrorMessage(data.message.toString()));
         }
@@ -45,25 +45,4 @@ const fetchImperialWeatherData = () => {
   };
 };
 
-const fetchMetricWeatherData = () => {
-  return (dispatch) => {
-    return fetchWeather(METRIC).then(
-      (data) => {
-        if (data.cod === SUCCESS_CODE) {
-          const dailyData = organizeWeatherData(data);
-          dispatch(getWeatherData(dailyData, METRIC));
-        } else {
-          dispatch(setErrorMessage(data.message.toString()));
-        }
-      },
-      (error) => dispatch(setErrorMessage(error.message.toString()))
-    );
-  };
-};
-
-export {
-  setWeatherUnit,
-  fetchMetricWeatherData,
-  fetchImperialWeatherData,
-  setSelectedCard,
-};
+export { setWeatherUnit, fetchWeatherData, setSelectedCard };
