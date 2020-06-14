@@ -65,7 +65,7 @@ WeatherCardRow.defaultProps = {
 };
 
 WeatherCardRow.propTypes = {
-  data: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)),
+  data: PropTypes.objectOf(PropTypes.object),
   leftIndex: PropTypes.number,
   unit: PropTypes.string,
   setCardsOnScreen: PropTypes.func,

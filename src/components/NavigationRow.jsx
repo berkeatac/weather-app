@@ -54,7 +54,7 @@ NavigationRow.propTypes = {
   nextPage: PropTypes.func,
   previousPage: PropTypes.func,
   cardAmount: PropTypes.number,
-  data: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)),
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 
 const mapStateToProps = (state) => ({

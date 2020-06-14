@@ -26,6 +26,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      favicon: "./src/favicon.ico",
       title: "Weather App",
       template: "./src/index.html",
     }),

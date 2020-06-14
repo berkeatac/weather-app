@@ -21,7 +21,7 @@ const WeatherChart = ({ data }) => {
   return (
     <Grid item xs={12} align="center">
       <ResponsiveContainer width="95%" height={250}>
-        <BarChart width="auto" height={250} data={chartData}>
+        <BarChart height={250} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="hour" />
           <YAxis />
@@ -37,7 +37,7 @@ WeatherChart.defaultProps = {
 };
 
 WeatherChart.propTypes = {
-  data: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)),
+  data: PropTypes.objectOf(PropTypes.number),
 };
 
 const mapStateToProps = (state) => ({

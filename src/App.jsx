@@ -35,7 +35,7 @@ const App = ({
     <Container style={{ marginTop: 40 }}>
       <CssBaseline />
       {loading ? (
-        <Grid container spacing={12} align="center">
+        <Grid container spacing={10} align="center">
           <Grid item xs={12} align="center">
             <CircularProgress />
           </Grid>
