@@ -5,6 +5,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
+import { getAverageTemp, getMinTemp, getMaxTemp } from "../utils";
+
 const useStyles = makeStyles({
   root: {
     minWidth: 150,
@@ -18,15 +20,6 @@ const useStyles = makeStyles({
 const WeatherCard = ({ date, temps, unit, selected }) => {
   const classes = useStyles(selected);
 
-  const averageTemp = (temp) => {
-    const values = Object.values(temp);
-    return temp
-      ? (
-          values.reduce((prev, cur) => prev + cur, 0).toFixed(0) / values.length
-        ).toFixed(1)
-      : 0;
-  };
-
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent align="center">
@@ -34,10 +27,10 @@ const WeatherCard = ({ date, temps, unit, selected }) => {
           {date}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          _weather_condition_
+          {`${getMinTemp(temps)} °${unit} - ${getMaxTemp(temps)} °${unit}`}
         </Typography>
         <Typography variant="h6" component="p">
-          {`${averageTemp(temps)} °${unit}`}
+          {`${getAverageTemp(temps)} °${unit}`}
           <br />
         </Typography>
       </CardContent>
