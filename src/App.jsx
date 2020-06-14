@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import {
   fetchMetricWeatherData,
@@ -14,6 +13,7 @@ import NavigationRow from "./components/NavigationRow";
 import WeatherChart from "./components/WeatherChart";
 import CheckboxRow from "./components/CheckboxRow";
 import ErrorDisplay from "./components/ErrorDisplay";
+import Spinner from "./components/Spinner";
 
 const App = ({ getMetricWeather, getImperialWeather, loading, error }) => {
   useEffect(() => {
@@ -26,11 +26,7 @@ const App = ({ getMetricWeather, getImperialWeather, loading, error }) => {
   return (
     <Container style={{ marginTop: 40 }}>
       {loading ? (
-        <Grid container align="center">
-          <Grid item xs={12} align="center">
-            <CircularProgress />
-          </Grid>
-        </Grid>
+        <Spinner />
       ) : (
         <Grid container spacing={3}>
           <CheckboxRow />
