@@ -20,13 +20,14 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    publicPath: "/",
+    publicPath: "/weather-app/",
     filename: "bundle.js",
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      favicon: "./src/favicon.ico",
       title: "Weather App",
       template: "./src/index.html",
     }),
