@@ -1,21 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 import { getAverageTemp, getMinTemp, getMaxTemp } from "../../utils";
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 150,
-    borderColor: (selected) => (selected ? "#000000" : null),
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
+import useStyles from "./style";
 
 const WeatherCard = ({ date, temps, unit, selected }) => {
   const classes = useStyles(selected);

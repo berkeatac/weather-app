@@ -19,6 +19,7 @@ const CheckboxRow = ({ unit, setUnit }) => {
               name={METRIC}
               checked={unit === METRIC}
               onClick={() => setUnit(METRIC)}
+              id="unitCheckbox"
             />
           }
           label="Celcius"

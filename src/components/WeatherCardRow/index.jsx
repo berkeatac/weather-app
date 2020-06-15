@@ -41,12 +41,13 @@ const WeatherCardRow = ({
         .slice(leftIndex, leftIndex + cardAmount)
         .map(([key, value]) => (
           <Grid item xs={12 / cardAmount} key={key}>
-            <CardActionArea onClick={() => setChartDay(key)}>
+            <CardActionArea onClick={() => setChartDay(key)} id="card-action">
               <WeatherCard
                 date={key}
                 temps={value}
                 unit={unit === METRIC ? "C" : "F"}
                 selected={selectedCard === key}
+                id="weather-card"
               />
             </CardActionArea>
           </Grid>

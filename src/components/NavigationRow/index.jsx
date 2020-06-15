@@ -23,6 +23,7 @@ const NavigationRow = ({
       <IconButton
         onClick={() => previousPage()}
         style={{ visibility: `${leftIndex ? "visible" : "hidden"}` }}
+        id="leftButton"
       >
         <NavigateBeforeIcon style={{ fontSize: 40 }} />
       </IconButton>
@@ -34,6 +35,7 @@ const NavigationRow = ({
             leftIndex + cardAmount < totalCards ? "visible" : "hidden"
           }`,
         }}
+        id="rightButton"
       >
         <NavigateNextIcon style={{ fontSize: 40 }} />
       </IconButton>
