@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "production",
-  devtool: "source-map",
   entry: "./src/index.js",
   module: {
     rules: [
@@ -17,11 +15,6 @@ module.exports = {
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
-  },
-  output: {
-    path: `${__dirname}/dist`,
-    publicPath: "/weather-app/",
-    filename: "bundle.js",
   },
   plugins: [
     new CleanWebpackPlugin(),
